@@ -1,9 +1,9 @@
-import { act, useState } from 'react'
-import CounterPage from './pages/CounterPage';
-import PerformancePage from './pages/PerformancePage';
-import TodoPage from './pages/TodoPage';
-import UsersPage from './pages/UsersPage';
-import './App.css'
+import { useState } from "react";
+import CounterPage from "./pages/CounterPage";
+import PerformancePage from "./pages/PerformancePage";
+import TodoPage from "./pages/TodoPage";
+import UsersPage from "./pages/UsersPage";
+import "./App.css";
 
 function App() {
   const [activeTab, setActiveTab] = useState("counter");
@@ -28,7 +28,7 @@ function App() {
         {activeTab === "users" && <UsersPage />}
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
