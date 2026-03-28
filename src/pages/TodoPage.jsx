@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import TodoForm from "../components/todo/TodoForm";
+import TodoStats from "../components/todo/TodoStats";
+import TodoList from "../components/todo/TodoList";
+
 function TodoPage() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([
@@ -41,48 +45,21 @@ function TodoPage() {
   return (
     <div>
       <h2>Todo Lab</h2>
-      <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
-        <input
-          type="text"
-          placeholder="Add a todo"
-          value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") handleAddTodo();
-          }}
-        />
-        <button onClick={handleAddTodo}>Add</button>
-      </div>
-
-      <p>Total: {totalTodos}</p>
-      <p>Active: {activeTodos}</p>
-      <p>Completed: {completedTodos}</p>
-      {todos.length}
-      {todos.length === 0 ? (
-        <p> No todos yet.</p>
-      ) : (
-        <ul style={{ paddingLeft: "20px" }}>
-          {todos.map((todo) => (
-            <li key={todo.id} style={{ marginBottom: "12px" }}>
-              <span
-                style={{
-                  marginRight: "12px",
-                  textDecoration: todo.completed ? "line-through" : "none",
-                }}
-              >
-                {todo.text}
-              </span>
-              <button
-                onClick={() => handleToggleTodo(todo.id)}
-                style={{ marginRight: "8px" }}
-              >
-                {todo.completed ? "Undo" : "Completed"}
-              </button>
-              <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <TodoForm
+        inputValue={inputValue}
+        onInputChange={setInputValue}
+        onAddTodo={handleAddTodo}
+      />
+      <TodoStats
+        totalTodos={totalTodos}
+        activeTodos={activeTodos}
+        completedTodos={completedTodos}
+      />
+      <TodoList
+        todos={todos}
+        onToggleTodo={handleToggleTodo}
+        onDeleteTodo={handleDeleteTodo}
+      />
     </div>
   );
 }
