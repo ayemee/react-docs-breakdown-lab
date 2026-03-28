@@ -3,6 +3,7 @@ import { useState } from "react";
 import TodoForm from "../components/todo/TodoForm";
 import TodoStats from "../components/todo/TodoStats";
 import TodoList from "../components/todo/TodoList";
+import SectionCard from "../components/layout/SectionCard";
 
 function TodoPage() {
   const [inputValue, setInputValue] = useState("");
@@ -43,8 +44,7 @@ function TodoPage() {
   const activeTodos = totalTodos - completedTodos;
 
   return (
-    <div>
-      <h2>Todo Lab</h2>
+    <SectionCard title="Todo Lab">
       <TodoForm
         inputValue={inputValue}
         onInputChange={setInputValue}
@@ -60,7 +60,7 @@ function TodoPage() {
         onToggleTodo={handleToggleTodo}
         onDeleteTodo={handleDeleteTodo}
       />
-    </div>
+    </SectionCard>
   );
 }
 

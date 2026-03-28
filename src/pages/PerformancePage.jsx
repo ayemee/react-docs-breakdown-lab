@@ -1,4 +1,6 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import useDebounce from "../hooks/useDebounce";
+import MemoChild from "../components/performance/MemoChild";
 
 const items = [
   "React",
@@ -23,28 +25,20 @@ const items = [
   "Vitest",
 ];
 
-const MemoChild = memo(function MemoChild({ onAction }) {
-  console.log("render -> Memo Child");
-
-  return (
-    <div style={{ marginTop: "16px" }}>
-      <button onClick={onAction}>Child Action</button>
-    </div>
-  );
-});
-
 function PerformancePage() {
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
+
+  const debouncedSearch = useDebounce(search, 400);
 
   console.log("render -> Performance Page");
   const filteredItems = useMemo(() => {
     console.log("compute -> filtering items");
 
     return items.filter((item) =>
-      item.toLowerCase().includes(search.toLowerCase()),
+      item.toLowerCase().includes(debouncedSearch.toLowerCase()),
     );
-  }, [search]);
+  }, [debouncedSearch]);
 
   const handleChildAction = useCallback(() => {
     console.log("child action clicked");
@@ -54,6 +48,9 @@ function PerformancePage() {
     <div>
       <h2>Performance Lab</h2>
       <p>Parent Count: {count}</p>
+      <p>Search: {search}</p>
+      <p>Debounced Search: {debouncedSearch}</p>
+
       <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
         <button onClick={() => setCount((prevCount) => prevCount + 1)}>
           Increment parent count

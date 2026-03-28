@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useDocumentTitle from "../hooks/useDocumentTitle";
+import SectionCard from "../components/layout/SectionCard";
 
 function CounterPage() {
   const [count, setCount] = useState(0);
 
-  console.log("render -> CounterPage", count);
+  useDocumentTitle(`Counter (${count})`);
 
-  useEffect(() => {
-    console.log("effect -> count changed", count);
-  }, [count]);
   return (
-    <div>
-      <h2>Counter Lab</h2>
+    <SectionCard title="Counter Lab">
+      <Counter count={count} setCount={setCount} />
       <p>Count: {count}</p>
 
       <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
@@ -23,7 +22,7 @@ function CounterPage() {
         <button onClick={() => setCount(0)}>Reset</button>
       </div>
       <p>Open the browser console to see render and effect logs.</p>
-    </div>
+    </SectionCard>
   );
 }
 

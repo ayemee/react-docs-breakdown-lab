@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SectionCard from "../components/layout/SectionCard";
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -30,8 +31,7 @@ function UsersPage() {
   }, []);
 
   return (
-    <div>
-      <h2>Users Lab</h2>
+    <SectionCard title="Users Lab">
       <button onClick={fetchUsers} style={{ marginBottom: "12px" }}>
         {" "}
         Refetch
@@ -49,7 +49,7 @@ function UsersPage() {
           ))}
         </ul>
       )}
-    </div>
+    </SectionCard>
   );
 }
 
