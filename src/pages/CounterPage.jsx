@@ -9,7 +9,6 @@ function CounterPage() {
 
   return (
     <SectionCard title="Counter Lab">
-      <Counter count={count} setCount={setCount} />
       <p>Count: {count}</p>
 
       <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
